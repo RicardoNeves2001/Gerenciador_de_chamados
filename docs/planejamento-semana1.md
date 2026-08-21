@@ -1,6 +1,6 @@
 # Planejamento da Semana 1
 
-**Data:** 21 de agosto de 2026  
+**Data:** 10 de agosto de 2026
 **Produto:** Sistema de Gestão de Chamados (MVP)
 
 ## Problema
@@ -32,6 +32,24 @@ O primeiro ciclo terá um sistema web com API e banco relacional. O foco é gara
 | Cliente | Informar o problema e acompanhar o atendimento. | Visualiza e interage apenas com os próprios chamados. |
 | Atendente | Organizar a fila e resolver solicitações. | Visualiza a fila e altera chamados sob atendimento. |
 
+## Requisitos funcionais
+
+- O sistema deve permitir que uma pessoa cliente registre um chamado com título, descrição e categoria.
+- O sistema deve permitir que uma pessoa cliente consulte os chamados registrados por ela.
+- O sistema deve permitir que uma pessoa atendente consulte os chamados abertos.
+- O sistema deve permitir que uma pessoa atendente altere o status de um chamado.
+- O sistema deve permitir que uma pessoa atendente registre uma observação e encerre um chamado.
+
+## Recursos e informações armazenadas
+
+| Recurso | Possíveis informações |
+| --- | --- |
+| Chamado | Identificador, título, descrição, status, data de abertura, data de encerramento, cliente, atendente e categoria. |
+| Cliente | Identificador, nome e contato. |
+| Atendente | Identificador e nome. |
+| Categoria | Identificador, nome e descrição. |
+| Observação | Texto, autor e data da atualização. |
+
 ## Regras essenciais
 
 - Todo chamado nasce como **Aberto** e recebe identificador e data de abertura no back-end.
@@ -42,11 +60,20 @@ O primeiro ciclo terá um sistema web com API e banco relacional. O foco é gara
 
 ## Fluxo principal: abertura de chamado
 
-1. A pessoa cliente preenche título, categoria e descrição.
-2. A interface valida o preenchimento e envia um `POST` para a API.
-3. A API valida os dados e a permissão, cria o chamado como **Aberto** e salva o registro.
-4. A API responde com `201 Created` e o identificador do chamado.
-5. A interface confirma a abertura e mostra o protocolo.
+1. A pessoa cliente acessa a tela de abertura de chamado.
+2. A pessoa cliente informa título, categoria e descrição e seleciona a opção de envio.
+3. A interface valida os campos obrigatórios e envia um `POST` para a API.
+4. A API valida os dados e a permissão e cria o chamado como **Aberto**.
+5. O banco de dados armazena o chamado com identificador e data de abertura.
+6. A API responde com `201 Created` e o identificador do chamado.
+7. A interface confirma a abertura e mostra o protocolo para a pessoa cliente.
+
+## Discussão técnica
+
+- **O que a interface faz neste fluxo?** Coleta os dados, verifica campos obrigatórios, envia a requisição e exibe o resultado para a pessoa cliente.
+- **Qual regra precisa ficar no back-end?** A validação de permissões, a criação do identificador, o status inicial, as transições de status e as datas de controle.
+- **Onde os chamados são armazenados?** Em um banco de dados relacional, acessado somente pelo back-end.
+- **Qual componente pode ser substituído com menor impacto?** A interface web, porque se comunica com o back-end por uma API. Uma aplicação mobile poderia consumir o mesmo contrato.
 
 ## Critério de aceite do ciclo inicial
 
