@@ -1,3 +1,8 @@
+## Integrantes
+
+- Ricardo da Silva Neves
+- Thiago Penetra Cunha de Melo
+
 # Gerenciador de Chamados
 
 Sistema web para registrar, acompanhar e resolver solicitações de suporte interno em um único lugar.
@@ -38,7 +43,3 @@ Notificações automáticas, anexos e relatórios de SLA ficam para uma próxima
 
 O planejamento está em [docs/planejamento-semana1.md](docs/planejamento-semana1.md), e a arquitetura está em [docs/diagrama-arquitetura.md](docs/diagrama-arquitetura.md).
 
-## Integrantes
-
-- Ricardo da Silva Neves
-- Thiago Penetra Cunha de Melo
