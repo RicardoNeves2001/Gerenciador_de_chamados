@@ -57,6 +57,9 @@ class ChamadoService:
     def listar(self) -> list[dict[str, Any]]:
         return self._chamados.copy()
 
+    def listar_por_status(self, status: str) -> list[dict[str, Any]]:
+        return [chamado for chamado in self._chamados if chamado["status"] == status]
+
     def buscar(self, chamado_id: int) -> dict[str, Any]:
         for chamado in self._chamados:
             if chamado["id"] == chamado_id:

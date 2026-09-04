@@ -38,6 +38,27 @@ class ChamadosApiTest(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json()["status"], "aberto")
 
+    def test_filtra_chamados_por_status(self) -> None:
+        self.client.post(
+            "/chamados",
+            json={"titulo": "Aberto", "descricao": "Descricao", "prioridade": "baixa"},
+        )
+        self.client.post(
+            "/chamados",
+            json={
+                "titulo": "Fechado",
+                "descricao": "Descricao",
+                "prioridade": "media",
+                "status": "fechado",
+            },
+        )
+
+        response = self.client.get("/chamados/status/fechado")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0]["titulo"], "Fechado")
+
     def test_valida_dados_e_retorna_404(self) -> None:
         self.assertEqual(self.client.post("/chamados", json={"descricao": "Descricao"}).status_code, 422)
         self.assertEqual(

@@ -33,6 +33,10 @@ def create_controller(service: ChamadoService) -> APIRouter:
     def list_called() -> list[dict[str, Any]]:
         return service.listar()
 
+    @controller.get("/chamados/status/{status_chamado}")
+    def list_called_by_status(status_chamado: Literal["aberto", "em_andamento", "fechado"]) -> list[dict[str, Any]]:
+        return service.listar_por_status(status_chamado)
+
     @controller.get("/chamados/{called_id}")
     def get_called(called_id: int) -> dict[str, Any]:
         try:
