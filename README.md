@@ -35,7 +35,7 @@ Notificações automáticas, anexos e relatórios de SLA ficam para uma próxima
 
 ```text
 .
-├── backend/    # API e regras de negócio
+├── backend-python/ # API Python e regras de negócio
 ├── database/   # Modelo e scripts do banco
 ├── docs/       # Planejamento e arquitetura
 └── frontend/   # Interface web
