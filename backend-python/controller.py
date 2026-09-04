@@ -8,6 +8,10 @@ from service import ChamadoNaoEncontradoError, ChamadoService, DadosInvalidosErr
 def create_controller(service: ChamadoService) -> Blueprint:
     controller = Blueprint("chamados", __name__)
 
+    @controller.get("/")
+    def health_check() -> Any:
+        return jsonify(status="ok", mensagem="API de chamados funcionando")
+
     @controller.errorhandler(DadosInvalidosError)
     def handle_invalid_data(error: DadosInvalidosError) -> tuple[Any, int]:
         return jsonify(erro="dados invalidos", detalhes=error.detalhes), 400

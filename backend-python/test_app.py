@@ -10,6 +10,12 @@ class ChamadosApiTest(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_rota_raiz_indica_que_api_esta_disponivel(self) -> None:
+        response = self.client.get("/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["status"], "ok")
+
     def test_cria_lista_e_consulta_chamado(self) -> None:
         response = self.client.post(
             "/chamados",
